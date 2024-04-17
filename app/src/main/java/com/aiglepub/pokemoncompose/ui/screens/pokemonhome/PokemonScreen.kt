@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.aiglepub.pokemoncompose.data.Pokemon
-import com.aiglepub.pokemoncompose.data.pokemonsMock
 import com.aiglepub.pokemoncompose.ui.ScreenAppTheme
 import com.aiglepub.pokemoncompose.ui.screens.scaffoldcomponents.ScaffoldTopBar
 
