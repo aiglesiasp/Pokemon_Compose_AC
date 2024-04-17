@@ -7,9 +7,17 @@ class PokemonRepository {
             .fetchAllPokemons()
             .results
             .map { it.toDomainModel() }
+
+    suspend fun fetchPokemonByName(name: String): Pokemon =
+        PokemonClient.instance
+            .fetchPokemonByName(name)
+            .toDomainModel()
 }
 
-private fun RemotePokemon.toDomainModel(): Pokemon {
+
+
+
+private fun RemoteSimplePokemon.toDomainModel(): Pokemon {
     val lastSlashIndex = url?.lastIndexOf('/')
     val secondLastSlashIndex = url?.substring(0, lastSlashIndex?.minus(1) ?: 0)?.lastIndexOf('/')
     val pokemonNumber = lastSlashIndex?.let { url?.substring(secondLastSlashIndex?.plus(1) ?: 0, it) }
@@ -26,4 +34,12 @@ private fun RemotePokemon.toDomainModel(): Pokemon {
             poster = ""
         )
     }
+}
+
+private fun RemoteFullPokemon.toDomainModel(): Pokemon {
+    return Pokemon(
+        id = id,
+        name = name,
+        poster = sprites.frontDefault
+    )
 }
