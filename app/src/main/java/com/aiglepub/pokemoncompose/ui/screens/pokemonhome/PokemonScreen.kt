@@ -1,4 +1,4 @@
-package com.aiglepub.pokemoncompose.ui.screens
+package com.aiglepub.pokemoncompose.ui.screens.pokemonhome
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
