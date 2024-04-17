@@ -12,6 +12,6 @@ data class RemoteResult(
 
 @Serializable
 data class RemotePokemon(
-    val name: Int,
-    val url: String
+    val name: String,
+    val url: String?
 )
