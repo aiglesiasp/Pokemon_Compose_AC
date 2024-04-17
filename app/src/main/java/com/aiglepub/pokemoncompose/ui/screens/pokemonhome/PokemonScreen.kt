@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CardElevation
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -82,11 +83,12 @@ fun PokemonScreen(vm: PokemonViewModel = viewModel(), onClick: (Pokemon) -> Unit
 @Composable
 fun PokemonItem(pokemon: Pokemon, onClick: () -> Unit) {
     Card(
+        elevation = CardDefaults.cardElevation(8.dp),
         modifier = Modifier
             .padding(8.dp)
             .clip(MaterialTheme.shapes.medium)
-            .border(1.dp, Color.Gray, MaterialTheme.shapes.medium)
-            .shadow(4.dp),
+            .border(1.dp, Color.LightGray, MaterialTheme.shapes.medium),
+            //.shadow(elevation = 8.dp, spotColor = Color.Black),
         onClick = onClick
     ) {
         Column(
