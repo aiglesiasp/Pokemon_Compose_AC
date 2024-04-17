@@ -15,5 +15,7 @@ fun Navigation() {
         composable("pokemonHome") {
             PokemonScreen()
         }
+
+
     }
 }
