@@ -36,7 +36,7 @@ fun PokemonDetailScreen(vm: PokemonDetailViewModel = viewModel(), onBack: () -> 
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text(text = state.pokemon?.name ?: "") },
+                    title = { Text(text = state.pokemon?.name?.uppercase() ?: "") },
                     navigationIcon = {
                         IconButton(onClick = onBack) {
                             Icon(imageVector = Icons.AutoMirrored.Default.ArrowBack, contentDescription = "Arrow back" )
