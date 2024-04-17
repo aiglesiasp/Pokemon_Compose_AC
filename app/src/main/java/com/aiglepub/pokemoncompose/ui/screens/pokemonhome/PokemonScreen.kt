@@ -22,7 +22,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
@@ -32,7 +31,7 @@ import com.aiglepub.pokemoncompose.ui.ScreenAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PokemonScreen(vm: PokemonViewModel = viewModel()) {
+fun PokemonScreen(vm: PokemonViewModel = viewModel(), onClick: (Pokemon) -> Unit) {
 
     vm.onUiReady()
 
@@ -64,7 +63,10 @@ fun PokemonScreen(vm: PokemonViewModel = viewModel()) {
                 contentPadding = paddingValues
             ) {
                 items(state.pokemons) {pokemon ->
-                    PokemonItem(pokemon = pokemon)
+                    PokemonItem(
+                        pokemon = pokemon,
+                        onClick = { onClick(pokemon) }
+                    )
                 }
             }
         }
@@ -72,9 +74,9 @@ fun PokemonScreen(vm: PokemonViewModel = viewModel()) {
 }
 
 @Composable
-fun PokemonItem(pokemon: Pokemon) {
+fun PokemonItem(pokemon: Pokemon, onClick: () -> Unit) {
     Column(
-        modifier = Modifier.clickable(onClick = {  })
+        modifier = Modifier.clickable(onClick = onClick)
     ) {
         AsyncImage(
             model = pokemon.poster,
@@ -91,10 +93,4 @@ fun PokemonItem(pokemon: Pokemon) {
             modifier = Modifier.padding(8.dp)
         )
     }
-}
-
-@Preview(showSystemUi = true)
-@Composable
-private fun PokemonScreen_Preview() {
-    PokemonScreen()
 }
