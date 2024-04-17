@@ -9,7 +9,7 @@ data class Pokemon(
 val pokemonsMock = (1..100).map {
     Pokemon(
         id = it,
-        name = "Movie $it",
+        name = "Pokemon $it",
         poster = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$it.png"
     )
 }
