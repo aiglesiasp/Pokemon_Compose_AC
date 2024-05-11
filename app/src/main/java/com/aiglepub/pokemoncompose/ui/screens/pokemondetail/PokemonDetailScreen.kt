@@ -2,6 +2,7 @@ package com.aiglepub.pokemoncompose.ui.screens.pokemondetail
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,6 +26,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.aiglepub.pokemoncompose.data.Pokemon
 import com.aiglepub.pokemoncompose.ui.ScreenAppTheme
 import com.aiglepub.pokemoncompose.ui.common.LoadingProgressIndicator
 
@@ -36,43 +38,63 @@ fun PokemonDetailScreen(vm: PokemonDetailViewModel = viewModel(), onBack: () -> 
     ScreenAppTheme {
         Scaffold(
             topBar = {
-                TopAppBar(
-                    title = { Text(text = state.pokemon?.name?.uppercase() ?: "") },
-                    navigationIcon = {
-                        IconButton(onClick = onBack) {
-                            Icon(imageVector = Icons.AutoMirrored.Default.ArrowBack, contentDescription = "Arrow back" )
-                        }
-                    }
-                )
+                DetailTopBar(state.pokemon?.name ?: "", onBack)
             }
         ) {paddingValues ->
-            Column(
-                modifier = Modifier
-                    .padding(paddingValues)
-                    .verticalScroll(rememberScrollState())
-            ) {
-                if(state.loading) {
-                    LoadingProgressIndicator(modifier = Modifier.padding(paddingValues))
-                }
-                AsyncImage(
-                    model = state.pokemon?.poster,
-                    contentDescription = state.pokemon?.name,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(16 / 12f)
-                )
-                state.pokemon?.name?.let {
-                    Text(
-                        text = it,
-                        modifier = Modifier.padding(16.dp),
-                        style = MaterialTheme.typography.headlineMedium
-                    )
-                }
 
-
+            if(state.loading) {
+                LoadingProgressIndicator(modifier = Modifier.padding(paddingValues))
             }
+
+            state.pokemon?.let {pokemon ->
+                PokemonDetail(pokemon = pokemon, modifier = Modifier.padding(paddingValues))
+            }
+
         }
     }
+}
 
+@Composable
+private fun PokemonDetail(
+    pokemon: Pokemon,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier.verticalScroll(rememberScrollState())
+    ) {
+
+        AsyncImage(
+            model = pokemon.poster,
+            contentDescription = pokemon.name,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(16 / 12f)
+        )
+
+        Text(
+            text = pokemon.name,
+            modifier = Modifier.padding(16.dp),
+            style = MaterialTheme.typography.headlineMedium
+        )
+    }
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun DetailTopBar(
+    title: String,
+    onBack: () -> Unit
+) {
+    TopAppBar(
+        title = { Text(text = title) },
+        navigationIcon = {
+            IconButton(onClick = onBack) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Default.ArrowBack,
+                    contentDescription = "Arrow back"
+                )
+            }
+        }
+    )
 }

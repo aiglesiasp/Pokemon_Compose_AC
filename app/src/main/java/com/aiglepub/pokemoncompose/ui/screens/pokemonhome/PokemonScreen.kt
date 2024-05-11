@@ -48,7 +48,7 @@ fun PokemonScreen(vm: PokemonViewModel = viewModel(), onClick: (Pokemon) -> Unit
         Scaffold(
             topBar = {
                 TopAppBar(
-                title = { Text(text = stringResource(id = R.string.app_name)) } )
+                    title = { Text(text = stringResource(id = R.string.app_name)) } )
             }
         ) { paddingValues ->
 
