@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.aiglepub.pokemoncompose.ui.ScreenAppTheme
+import com.aiglepub.pokemoncompose.ui.common.LoadingProgressIndicator
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,13 +52,7 @@ fun PokemonDetailScreen(vm: PokemonDetailViewModel = viewModel(), onBack: () -> 
                     .verticalScroll(rememberScrollState())
             ) {
                 if(state.loading) {
-                    Box(modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator()
-                    }
+                    LoadingProgressIndicator(modifier = Modifier.padding(paddingValues))
                 }
                 AsyncImage(
                     model = state.pokemon?.poster,

@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,6 +36,7 @@ import coil.compose.AsyncImage
 import com.aiglepub.pokemoncompose.R
 import com.aiglepub.pokemoncompose.data.Pokemon
 import com.aiglepub.pokemoncompose.ui.ScreenAppTheme
+import com.aiglepub.pokemoncompose.ui.common.LoadingProgressIndicator
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,14 +54,7 @@ fun PokemonScreen(vm: PokemonViewModel = viewModel(), onClick: (Pokemon) -> Unit
 
             val state = vm.state
             if(state.loading) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator()
-                }
+                LoadingProgressIndicator(modifier = Modifier.padding(paddingValues))
             }
 
             LazyVerticalGrid(
@@ -79,6 +74,8 @@ fun PokemonScreen(vm: PokemonViewModel = viewModel(), onClick: (Pokemon) -> Unit
         }
     }
 }
+
+
 
 @Composable
 fun PokemonItem(pokemon: Pokemon, onClick: () -> Unit) {
