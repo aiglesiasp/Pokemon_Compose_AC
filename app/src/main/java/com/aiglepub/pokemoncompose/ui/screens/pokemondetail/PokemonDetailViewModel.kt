@@ -6,12 +6,13 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aiglepub.pokemoncompose.data.Pokemon
+import com.aiglepub.pokemoncompose.data.PokemonClient
 import com.aiglepub.pokemoncompose.data.PokemonRepository
 import kotlinx.coroutines.launch
 
 class PokemonDetailViewModel(private val name: String): ViewModel() {
 
-    private val repository = PokemonRepository()
+    private val repository = PokemonRepository(PokemonClient.instance)
 
     var state by mutableStateOf(UiState())
         private set

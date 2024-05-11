@@ -1,20 +1,18 @@
 package com.aiglepub.pokemoncompose.data
 
-class PokemonRepository {
+class PokemonRepository(private val pokemonService: PokemonService) {
 
     suspend fun fetchAllPokemons(): List<Pokemon> =
-        PokemonClient.instance
+        pokemonService
             .fetchAllPokemons()
             .results
             .map { it.toDomainModel() }
 
     suspend fun fetchPokemonByName(name: String): Pokemon =
-        PokemonClient.instance
+        pokemonService
             .fetchPokemonByName(name)
             .toDomainModel()
 }
-
-
 
 
 private fun RemoteSimplePokemon.toDomainModel(): Pokemon {
