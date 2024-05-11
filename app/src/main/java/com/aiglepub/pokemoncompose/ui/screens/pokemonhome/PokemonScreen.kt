@@ -92,8 +92,6 @@ fun PokemonItem(pokemon: Pokemon, onClick: () -> Unit) {
         onClick = onClick
     ) {
         Column(
-            modifier = Modifier
-               ,
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
