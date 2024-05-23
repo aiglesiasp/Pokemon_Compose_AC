@@ -8,19 +8,22 @@ import androidx.lifecycle.viewModelScope
 import com.aiglepub.pokemoncompose.data.Pokemon
 import com.aiglepub.pokemoncompose.data.PokemonClient
 import com.aiglepub.pokemoncompose.data.PokemonRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class PokemonViewModel: ViewModel() {
 
-    var state by mutableStateOf(UiState())
-        private set
+    private val _state: MutableStateFlow<UiState> = MutableStateFlow(UiState())
+    val state: StateFlow<UiState> = _state.asStateFlow()
 
     private val repository = PokemonRepository(PokemonClient.instance)
 
     fun onUiReady() {
         viewModelScope.launch {
-            state = UiState(loading = true)
-            state = UiState(loading = false, pokemons = repository.fetchAllPokemons())
+            _state.value = UiState(loading = true)
+            _state.value = UiState(loading = false, pokemons = repository.fetchAllPokemons())
         }
     }
 
