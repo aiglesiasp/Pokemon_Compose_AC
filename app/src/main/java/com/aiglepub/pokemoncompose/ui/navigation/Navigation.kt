@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.toRoute
 import com.aiglepub.pokemoncompose.ui.screens.pokemondetail.PokemonDetailScreen
 import com.aiglepub.pokemoncompose.ui.screens.pokemondetail.PokemonDetailViewModel
 import com.aiglepub.pokemoncompose.ui.screens.pokemonhome.PokemonScreen
@@ -16,22 +17,19 @@ fun Navigation() {
 
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "pokemonHome" ) {
-        composable("pokemonHome") {
+    NavHost(navController = navController, startDestination = PokemonHome ) {
+        composable<PokemonHome> {
             PokemonScreen(onClick = {pokemon ->
-                navController.navigate("pokemonDetail/${pokemon.name}")
+                navController.navigate(PokemonDetail(pokemon.name))
             })
         }
 
-        composable(
-            route = "pokemonDetail/{pokemonName}",
-            arguments = listOf(navArgument("pokemonName") { type = NavType.StringType})
+        composable<PokemonDetail>(
         ) {backStackEntry ->
-            val pokemonName = backStackEntry.arguments?.getString("pokemonName")
-            requireNotNull(pokemonName)
+            val pokemonDetail = backStackEntry.toRoute<PokemonDetail>()
             PokemonDetailScreen(
-                vm = viewModel { PokemonDetailViewModel(pokemonName) },
-                onBack = { navController.popBackStack() }
+                vm = viewModel { PokemonDetailViewModel(pokemonDetail.pokemonName) },
+                onBack = { navController.popBackStack(route = PokemonHome, inclusive = true) }
             )
         }
     }
