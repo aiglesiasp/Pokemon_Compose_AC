@@ -38,5 +38,5 @@ class PokemonState @OptIn(ExperimentalMaterial3Api::class) constructor(
 fun rememberPokemonState(
     scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 ): PokemonState {
-    return remember { PokemonState(scrollBehavior) }
+    return remember(scrollBehavior) { PokemonState(scrollBehavior) }
 }
