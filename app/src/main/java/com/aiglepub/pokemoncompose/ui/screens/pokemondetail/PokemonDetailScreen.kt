@@ -18,7 +18,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -31,7 +30,6 @@ import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -45,17 +43,17 @@ import com.aiglepub.pokemoncompose.ui.common.LoadingProgressIndicator
 @Composable
 fun PokemonDetailScreen(vm: PokemonDetailViewModel = viewModel(), onBack: () -> Unit) {
     val state by vm.state.collectAsState()
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val detailState = rememberPokemonDetailState()
 
     ScreenAppTheme {
         Scaffold(
             topBar = {
                 DetailTopBar(
                     title = state.pokemon?.name ?: "",
-                    scrollBehavior = scrollBehavior,
+                    scrollBehavior = detailState.scrollBehavior,
                     onBack = onBack)
             },
-            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+            modifier = Modifier.nestedScroll(detailState.scrollBehavior.nestedScrollConnection),
             contentWindowInsets = WindowInsets.safeDrawing
         ) {paddingValues ->
 
@@ -66,7 +64,6 @@ fun PokemonDetailScreen(vm: PokemonDetailViewModel = viewModel(), onBack: () -> 
             state.pokemon?.let {pokemon ->
                 PokemonDetail(pokemon = pokemon, modifier = Modifier.padding(paddingValues))
             }
-
         }
     }
 }

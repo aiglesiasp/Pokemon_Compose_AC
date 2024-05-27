@@ -11,15 +11,15 @@ import androidx.compose.runtime.remember
 @OptIn(ExperimentalMaterial3Api::class)
 class PokemonDetailState(
     val scrollBehavior: TopAppBarScrollBehavior,
-    val snackbarHostState: SnackbarHostState
+    //val snackbarHostState: SnackbarHostState
 ) {
 
     @Composable
     fun ShowMessageEffect(message: String?, onMessageShown: () -> Unit) {
         LaunchedEffect(message) {
             message?.let {
-                snackbarHostState.currentSnackbarData?.dismiss()
-                snackbarHostState.showSnackbar(it)
+                //snackbarHostState.currentSnackbarData?.dismiss()
+                //snackbarHostState.showSnackbar(it)
                 onMessageShown()
             }
         }
@@ -31,7 +31,7 @@ class PokemonDetailState(
 @Composable
 fun rememberPokemonDetailState(
     scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(),
-    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() }
+    //snackbarHostState: SnackbarHostState = remember { SnackbarHostState() }
 ): PokemonDetailState {
-    return remember(scrollBehavior, snackbarHostState) { PokemonDetailState(scrollBehavior, snackbarHostState) }
+    return remember(scrollBehavior) { PokemonDetailState(scrollBehavior) }
 }
