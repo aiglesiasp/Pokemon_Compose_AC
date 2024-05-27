@@ -3,6 +3,8 @@ package com.aiglepub.pokemoncompose.data
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
+// PARA OBTENERLOS TODOS
 @Serializable
 data class RemoteResult(
     val count: Int,
@@ -17,12 +19,32 @@ data class RemoteSimplePokemon(
     val url: String?
 )
 
+
+//PARA OBTENER SOLO UNO
 @Serializable
 data class RemoteFullPokemon(
+    val abilities: List<Ability>,
+    @SerialName("base_experience") val baseExperience: Int,
+    val height: Int,
     val id: Int,
     val name: String,
+    val sprites: RemoteSprites,
     val stats: List<RemoteStats>,
-    val sprites: RemoteSprites
+    val types: List<PokemonType>,
+    val weight: Int,
+)
+
+@Serializable
+data class PokemonType(
+    val slot: Int,
+    val type: RemoteSimplePokemon
+)
+
+@Serializable
+data class Ability(
+    val ability: RemoteSimplePokemon,
+    @SerialName("is_hidden") val isHidden: Boolean,
+    val slot: Int
 )
 
 @Serializable
