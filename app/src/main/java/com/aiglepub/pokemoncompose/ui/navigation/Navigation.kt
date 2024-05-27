@@ -29,7 +29,7 @@ fun Navigation() {
             val pokemonDetail = backStackEntry.toRoute<PokemonDetail>()
             PokemonDetailScreen(
                 vm = viewModel { PokemonDetailViewModel(pokemonDetail.pokemonName) },
-                onBack = { navController.popBackStack(route = PokemonHome, inclusive = true) }
+                onBack = { navController.popBackStack(route = PokemonHome, inclusive = false) }
             )
         }
     }
