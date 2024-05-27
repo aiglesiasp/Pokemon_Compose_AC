@@ -1,9 +1,12 @@
 package com.aiglepub.pokemoncompose.ui.screens.pokemondetail
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -15,27 +18,45 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.ParagraphStyle
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.toUpperCase
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.aiglepub.pokemoncompose.data.Pokemon
 import com.aiglepub.pokemoncompose.ui.ScreenAppTheme
 import com.aiglepub.pokemoncompose.ui.common.LoadingProgressIndicator
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PokemonDetailScreen(vm: PokemonDetailViewModel = viewModel(), onBack: () -> Unit) {
     val state by vm.state.collectAsState()
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     ScreenAppTheme {
         Scaffold(
             topBar = {
-                DetailTopBar(state.pokemon?.name ?: "", onBack)
-            }
+                DetailTopBar(
+                    title = state.pokemon?.name ?: "",
+                    scrollBehavior = scrollBehavior,
+                    onBack = onBack)
+            },
+            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+            contentWindowInsets = WindowInsets.safeDrawing
         ) {paddingValues ->
 
             if(state.loading) {
@@ -73,6 +94,38 @@ private fun PokemonDetail(
             modifier = Modifier.padding(16.dp),
             style = MaterialTheme.typography.headlineMedium
         )
+
+        Text(
+            text = buildAnnotatedString {
+                Property("NAME: ", pokemon.name.toUpperCase())
+                Property("HEIGHT: ", pokemon.height.toString())
+                Property("WEIGHT: ", pokemon.weight.toString())
+                pokemon.stats.forEach {
+                    val statName = it.stat.name
+                    val statValue = it.baseStat.toString()
+                    Property(statName.toUpperCase(), statValue)
+                }
+                pokemon.types.forEach {
+                    val typeName = it.type.name
+                    val typeSlot = it.slot.toString()
+                    Property("TYPE ${typeSlot.toUpperCase()}", typeName)
+                }
+            },
+            modifier = Modifier.fillMaxWidth().background(color = MaterialTheme.colorScheme.secondaryContainer).padding(16.dp)
+        )
+    }
+}
+
+@Composable
+private fun AnnotatedString.Builder.Property(name: String, value: String, end: Boolean = false) {
+    withStyle(ParagraphStyle(lineHeight = 18.sp)) {
+        withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+            append("$name: ")
+        }
+        append(value)
+        if (!end) {
+            append("\n")
+        }
     }
 }
 
@@ -80,6 +133,7 @@ private fun PokemonDetail(
 @OptIn(ExperimentalMaterial3Api::class)
 private fun DetailTopBar(
     title: String,
+    scrollBehavior: TopAppBarScrollBehavior,
     onBack: () -> Unit
 ) {
     TopAppBar(
@@ -91,6 +145,7 @@ private fun DetailTopBar(
                     contentDescription = "Arrow back"
                 )
             }
-        }
+        },
+        scrollBehavior = scrollBehavior
     )
 }
