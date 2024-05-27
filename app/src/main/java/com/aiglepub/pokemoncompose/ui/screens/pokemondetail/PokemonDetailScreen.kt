@@ -100,15 +100,11 @@ private fun PokemonDetail(
                 Property("NAME: ", pokemon.name.toUpperCase())
                 Property("HEIGHT: ", pokemon.height.toString())
                 Property("WEIGHT: ", pokemon.weight.toString())
-                pokemon.stats.forEach {
-                    val statName = it.stat.name
-                    val statValue = it.baseStat.toString()
-                    Property(statName.toUpperCase(), statValue)
+                pokemon.stats.forEach {remoteStat ->
+                    Property(remoteStat.stat.name.toUpperCase(), remoteStat.baseStat.toString())
                 }
-                pokemon.types.forEach {
-                    val typeName = it.type.name
-                    val typeSlot = it.slot.toString()
-                    Property("TYPE ${typeSlot.toUpperCase()}", typeName)
+                pokemon.types.forEach {pokemonType ->
+                    Property("TYPE ${pokemonType.slot.toString().toUpperCase()}", pokemonType.type.name)
                 }
             },
             modifier = Modifier.fillMaxWidth().background(color = MaterialTheme.colorScheme.secondaryContainer).padding(16.dp)
