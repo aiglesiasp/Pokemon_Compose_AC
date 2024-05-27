@@ -6,10 +6,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -31,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -42,16 +45,25 @@ import com.aiglepub.pokemoncompose.ui.common.LoadingProgressIndicator
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PokemonScreen(vm: PokemonViewModel = viewModel(), onClick: (Pokemon) -> Unit) {
+fun PokemonScreen(vm: PokemonViewModel = viewModel(),
+                  onClick: (Pokemon) -> Unit
+) {
 
-    vm.onUiReady()
+    val pokemonState = rememberPokemonState()
+
+    ///Comprobar la region del telefono
+    pokemonState.AskRegionEffect { vm.onUiReady() }
 
     ScreenAppTheme {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text(text = stringResource(id = R.string.app_name)) } )
-            }
+                    title = { Text(text = stringResource(id = R.string.app_name)) },
+                    scrollBehavior = pokemonState.scrollBehavior
+                )
+            },
+            modifier = Modifier.nestedScroll(pokemonState.scrollBehavior.nestedScrollConnection),
+            contentWindowInsets = WindowInsets.safeDrawing
         ) { paddingValues ->
 
             val state by vm.state.collectAsState()
