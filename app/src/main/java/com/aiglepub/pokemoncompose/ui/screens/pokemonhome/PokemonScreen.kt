@@ -1,5 +1,6 @@
 package com.aiglepub.pokemoncompose.ui.screens.pokemonhome
 
+import android.Manifest
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -42,17 +43,20 @@ import com.aiglepub.pokemoncompose.R
 import com.aiglepub.pokemoncompose.data.Pokemon
 import com.aiglepub.pokemoncompose.ui.ScreenAppTheme
 import com.aiglepub.pokemoncompose.ui.common.LoadingProgressIndicator
+import com.aiglepub.pokemoncompose.ui.common.PermissionRequestEffect
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PokemonScreen(vm: PokemonViewModel = viewModel(),
+fun PokemonScreen(vm: PokemonViewModel,
                   onClick: (Pokemon) -> Unit
 ) {
 
     val pokemonState = rememberPokemonState()
 
     ///Comprobar la region del telefono
-    pokemonState.AskRegionEffect { vm.onUiReady() }
+    PermissionRequestEffect(permission = Manifest.permission.ACCESS_COARSE_LOCATION) {
+        vm.onUiReady()
+    }
 
     ScreenAppTheme {
         Scaffold(

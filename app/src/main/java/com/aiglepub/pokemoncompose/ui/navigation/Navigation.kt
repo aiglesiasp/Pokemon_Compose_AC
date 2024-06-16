@@ -1,27 +1,35 @@
 package com.aiglepub.pokemoncompose.ui.navigation
 
+import android.app.Application
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import androidx.navigation.toRoute
+import com.aiglepub.pokemoncompose.data.PokemonClient
+import com.aiglepub.pokemoncompose.data.PokemonRepository
+import com.aiglepub.pokemoncompose.data.RegionRepository
 import com.aiglepub.pokemoncompose.ui.screens.pokemondetail.PokemonDetailScreen
 import com.aiglepub.pokemoncompose.ui.screens.pokemondetail.PokemonDetailViewModel
 import com.aiglepub.pokemoncompose.ui.screens.pokemonhome.PokemonScreen
+import com.aiglepub.pokemoncompose.ui.screens.pokemonhome.PokemonViewModel
 
 @Composable
 fun Navigation() {
 
     val navController = rememberNavController()
+    val pokemonService = PokemonClient.instance
+    val regionRepository = RegionRepository(LocalContext.current.applicationContext as Application)
+    val pokemonRepository = PokemonRepository(pokemonService, regionRepository)
 
     NavHost(navController = navController, startDestination = PokemonHome ) {
         composable<PokemonHome> {
-            PokemonScreen(onClick = {pokemon ->
-                navController.navigate(PokemonDetail(pokemon.name))
-            })
+            PokemonScreen(
+                vm = viewModel { PokemonViewModel(pokemonRepository) },
+                onClick = {pokemon -> navController.navigate(PokemonDetail(pokemon.name)) }
+            )
         }
 
         composable<PokemonDetail>(

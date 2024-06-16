@@ -1,6 +1,9 @@
 package com.aiglepub.pokemoncompose.data
 
-class PokemonRepository(private val pokemonService: PokemonService) {
+class PokemonRepository(
+    private val pokemonService: PokemonService,
+    private val regionRepository: RegionRepository
+) {
 
     suspend fun fetchAllPokemons(): List<Pokemon> =
         pokemonService
