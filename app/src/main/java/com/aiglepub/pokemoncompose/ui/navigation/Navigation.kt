@@ -11,6 +11,8 @@ import androidx.navigation.toRoute
 import com.aiglepub.pokemoncompose.data.PokemonClient
 import com.aiglepub.pokemoncompose.data.PokemonRepository
 import com.aiglepub.pokemoncompose.data.RegionRepository
+import com.aiglepub.pokemoncompose.data.datasource.LocationDataSource
+import com.aiglepub.pokemoncompose.data.datasource.RegionDataSource
 import com.aiglepub.pokemoncompose.ui.screens.pokemondetail.PokemonDetailScreen
 import com.aiglepub.pokemoncompose.ui.screens.pokemondetail.PokemonDetailViewModel
 import com.aiglepub.pokemoncompose.ui.screens.pokemonhome.PokemonScreen
@@ -21,7 +23,10 @@ fun Navigation() {
 
     val navController = rememberNavController()
     val pokemonService = PokemonClient.instance
-    val regionRepository = RegionRepository(LocalContext.current.applicationContext as Application)
+    val aplication = LocalContext.current.applicationContext as Application
+    val locationDataSource = LocationDataSource(aplication)
+    val regionDataSource = RegionDataSource(aplication, locationDataSource)
+    val regionRepository = RegionRepository(regionDataSource)
     val pokemonRepository = PokemonRepository(pokemonService, regionRepository)
 
     NavHost(navController = navController, startDestination = PokemonHome ) {
