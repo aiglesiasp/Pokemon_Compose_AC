@@ -3,7 +3,6 @@ package com.aiglepub.pokemoncompose.ui.screens.pokemonhome
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aiglepub.pokemoncompose.data.Pokemon
-import com.aiglepub.pokemoncompose.data.PokemonClient
 import com.aiglepub.pokemoncompose.data.PokemonRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

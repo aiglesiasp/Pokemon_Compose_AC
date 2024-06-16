@@ -1,4 +1,4 @@
-package com.aiglepub.pokemoncompose.data
+package com.aiglepub.pokemoncompose.data.network
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -1,5 +1,9 @@
 package com.aiglepub.pokemoncompose.data
 
+import com.aiglepub.pokemoncompose.data.network.PokemonType
+import com.aiglepub.pokemoncompose.data.network.RemoteSimplePokemon
+import com.aiglepub.pokemoncompose.data.network.RemoteStats
+
 data class Pokemon(
     val id: Int,
     val name: String,
