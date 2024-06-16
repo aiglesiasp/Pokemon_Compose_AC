@@ -41,7 +41,7 @@ import com.aiglepub.pokemoncompose.ui.common.LoadingProgressIndicator
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PokemonDetailScreen(vm: PokemonDetailViewModel = viewModel(), onBack: () -> Unit) {
+fun PokemonDetailScreen(vm: PokemonDetailViewModel, onBack: () -> Unit) {
     val state by vm.state.collectAsState()
     val detailState = rememberPokemonDetailState()
 
