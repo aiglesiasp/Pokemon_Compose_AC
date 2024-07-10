@@ -13,7 +13,7 @@ interface PokemonDao {
     suspend fun getAllPokemons(): List<Pokemon>
 
     @Query("SELECT * FROM Pokemon WHERE id = :name")
-    suspend fun getPokemonByname(name: String): Pokemon
+    suspend fun getPokemonByname(name: String): Pokemon?
 
     @Query("SELECT COUNT() FROM Pokemon")
     suspend fun countPokemons(): Int
