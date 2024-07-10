@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.ksp)
 
 }
 
@@ -75,4 +76,7 @@ dependencies {
     implementation (libs.retrofit)
     implementation(libs.retrofit.converter.kotlinx.serialization)
     implementation(libs.kotlinx.serialization.json)
+    //ROOM
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 }
