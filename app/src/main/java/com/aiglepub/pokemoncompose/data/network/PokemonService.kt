@@ -1,4 +1,4 @@
-package com.aiglepub.pokemoncompose.data
+package com.aiglepub.pokemoncompose.data.network
 
 import retrofit2.http.GET
 import retrofit2.http.Path

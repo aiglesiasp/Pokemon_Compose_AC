@@ -1,14 +1,11 @@
 package com.aiglepub.pokemoncompose.ui.screens.pokemonhome
 
+import android.Manifest
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
@@ -16,10 +13,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -31,28 +25,29 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.aiglepub.pokemoncompose.R
 import com.aiglepub.pokemoncompose.data.Pokemon
 import com.aiglepub.pokemoncompose.ui.ScreenAppTheme
 import com.aiglepub.pokemoncompose.ui.common.LoadingProgressIndicator
+import com.aiglepub.pokemoncompose.ui.common.PermissionRequestEffect
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PokemonScreen(vm: PokemonViewModel = viewModel(),
+fun PokemonScreen(vm: PokemonViewModel,
                   onClick: (Pokemon) -> Unit
 ) {
 
     val pokemonState = rememberPokemonState()
 
     ///Comprobar la region del telefono
-    pokemonState.AskRegionEffect { vm.onUiReady() }
+    PermissionRequestEffect(permission = Manifest.permission.ACCESS_COARSE_LOCATION) {
+        vm.onUiReady()
+    }
 
     ScreenAppTheme {
         Scaffold(
