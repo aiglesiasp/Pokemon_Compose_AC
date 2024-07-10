@@ -1,9 +1,11 @@
 package com.aiglepub.pokemoncompose.data
 
-import com.aiglepub.pokemoncompose.data.network.PokemonType
-import com.aiglepub.pokemoncompose.data.network.RemoteSimplePokemon
-import com.aiglepub.pokemoncompose.data.network.RemoteStats
+import androidx.room.Entity
+import com.aiglepub.pokemoncompose.data.datasource.remote.network.PokemonType
+import com.aiglepub.pokemoncompose.data.datasource.remote.network.RemoteSimplePokemon
+import com.aiglepub.pokemoncompose.data.datasource.remote.network.RemoteStats
 
+@Entity
 data class Pokemon(
     val id: Int,
     val name: String,

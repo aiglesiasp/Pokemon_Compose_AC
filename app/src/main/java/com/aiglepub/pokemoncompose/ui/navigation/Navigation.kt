@@ -7,8 +7,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.aiglepub.pokemoncompose.data.PokemonRepository
-import com.aiglepub.pokemoncompose.data.datasource.PokemonRemoteDataSource
-import com.aiglepub.pokemoncompose.data.network.PokemonClient
+import com.aiglepub.pokemoncompose.data.datasource.remote.PokemonRemoteDataSource
+import com.aiglepub.pokemoncompose.data.datasource.remote.network.PokemonClient
 import com.aiglepub.pokemoncompose.ui.screens.pokemondetail.PokemonDetailScreen
 import com.aiglepub.pokemoncompose.ui.screens.pokemondetail.PokemonDetailViewModel
 import com.aiglepub.pokemoncompose.ui.screens.pokemonhome.PokemonScreen
@@ -21,7 +21,7 @@ fun Navigation() {
     val pokemonClient = PokemonClient.instance
     val pokemonRemoteDataSource = PokemonRemoteDataSource(pokemonClient)
     val pokemonRepository = PokemonRepository(pokemonRemoteDataSource)
-    
+
     NavHost(navController = navController, startDestination = PokemonHome ) {
         composable<PokemonHome> {
             PokemonScreen(

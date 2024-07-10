@@ -1,4 +1,4 @@
-package com.aiglepub.pokemoncompose.data.network
+package com.aiglepub.pokemoncompose.data.datasource.remote.network
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

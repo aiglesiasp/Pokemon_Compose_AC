@@ -1,4 +1,4 @@
-package com.aiglepub.pokemoncompose.data.datasource
+package com.aiglepub.pokemoncompose.data.datasource.local
 
 import android.app.Application
 import android.location.Address

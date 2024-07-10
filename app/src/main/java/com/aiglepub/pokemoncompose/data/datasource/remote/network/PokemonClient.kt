@@ -1,4 +1,4 @@
-package com.aiglepub.pokemoncompose.data.network
+package com.aiglepub.pokemoncompose.data.datasource.remote.network
 
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType

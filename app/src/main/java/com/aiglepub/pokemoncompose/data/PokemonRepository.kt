@@ -1,6 +1,6 @@
 package com.aiglepub.pokemoncompose.data
 
-import com.aiglepub.pokemoncompose.data.datasource.PokemonRemoteDataSource
+import com.aiglepub.pokemoncompose.data.datasource.remote.PokemonRemoteDataSource
 
 class PokemonRepository(private val pokemonRemoteDataSource: PokemonRemoteDataSource) {
 
