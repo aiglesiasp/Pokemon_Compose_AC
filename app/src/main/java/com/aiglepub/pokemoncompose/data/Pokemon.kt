@@ -1,12 +1,14 @@
 package com.aiglepub.pokemoncompose.data
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.aiglepub.pokemoncompose.data.datasource.remote.network.PokemonType
 import com.aiglepub.pokemoncompose.data.datasource.remote.network.RemoteSimplePokemon
 import com.aiglepub.pokemoncompose.data.datasource.remote.network.RemoteStats
 
 @Entity
 data class Pokemon(
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
     val name: String,
     val poster: String,
