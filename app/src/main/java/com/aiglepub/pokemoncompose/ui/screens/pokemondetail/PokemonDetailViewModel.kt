@@ -20,7 +20,10 @@ class PokemonDetailViewModel(
     init {
         viewModelScope.launch {
             _state.value = UiState(loading = true)
-            _state.value = UiState(loading = false, pokemon = repository.fetchPokemonByName(name))
+            repository.fetchPokemonByName(name).collect { pokemon ->
+                _state.value = UiState(loading = false, pokemon = pokemon)
+            }
+           // _state.value = UiState(loading = false, pokemon = repository.fetchPokemonByName(name))
         }
     }
 

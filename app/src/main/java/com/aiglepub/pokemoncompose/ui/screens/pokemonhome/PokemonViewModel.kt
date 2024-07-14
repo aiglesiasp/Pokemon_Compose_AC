@@ -19,7 +19,10 @@ class PokemonViewModel(
     fun onUiReady() {
         viewModelScope.launch {
             _state.value = UiState(loading = true)
-            _state.value = UiState(loading = false, pokemons = repository.fetchAllPokemons())
+            repository.pokemons.collect { listPokemons ->
+                _state.value = UiState(loading = false, pokemons = listPokemons)
+            }
+            //_state.value = UiState(loading = false, pokemons = repository.fetchAllPokemons())
         }
     }
 
