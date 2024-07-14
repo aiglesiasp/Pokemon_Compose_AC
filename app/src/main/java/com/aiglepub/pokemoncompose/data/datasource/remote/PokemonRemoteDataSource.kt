@@ -31,8 +31,8 @@ private fun RemoteSimplePokemon.toDomainModel(): Pokemon {
             poster = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$pokemonNumber.png",
             height = pokemonNumber.toInt(),
             weight = pokemonNumber.toInt(),
-            stats = emptyList(),
-            types = emptyList()
+            //stats = emptyList(),
+            //types = emptyList()
         )
     } else {
         Pokemon(
@@ -41,8 +41,8 @@ private fun RemoteSimplePokemon.toDomainModel(): Pokemon {
             poster = "",
             height = 0,
             weight = 0,
-            stats = emptyList(),
-            types = emptyList()
+            //stats = emptyList(),
+            //types = emptyList()
         )
     }
 }
@@ -54,7 +54,7 @@ private fun RemoteFullPokemon.toDomainModel(): Pokemon {
         poster = sprites.frontDefault,
         height = height,
         weight = weight,
-        stats = stats,
-        types = types
+        //stats = stats,
+        //types = types
     )
 }

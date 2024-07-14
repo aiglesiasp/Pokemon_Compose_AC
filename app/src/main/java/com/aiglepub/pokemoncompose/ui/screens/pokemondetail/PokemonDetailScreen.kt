@@ -33,7 +33,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.aiglepub.pokemoncompose.data.Pokemon
 import com.aiglepub.pokemoncompose.ui.ScreenAppTheme
@@ -97,12 +96,12 @@ private fun PokemonDetail(
                 Property("NAME: ", pokemon.name.toUpperCase())
                 Property("HEIGHT: ", pokemon.height.toString())
                 Property("WEIGHT: ", pokemon.weight.toString())
-                pokemon.stats.forEach {remoteStat ->
+                /*pokemon.stats.forEach {remoteStat ->
                     Property(remoteStat.stat.name.toUpperCase(), remoteStat.baseStat.toString())
                 }
                 pokemon.types.forEach {pokemonType ->
                     Property("TYPE ${pokemonType.slot.toString().toUpperCase()}", pokemonType.type.name)
-                }
+                }*/
             },
             modifier = Modifier.fillMaxWidth().background(color = MaterialTheme.colorScheme.secondaryContainer).padding(16.dp)
         )

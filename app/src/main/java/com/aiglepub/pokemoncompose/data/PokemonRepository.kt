@@ -14,7 +14,7 @@ class PokemonRepository(
             val pokemons = pokemonRemoteDataSource.fetchAllPokemons()
             pokemonLocalDataSource.insertPokemons(pokemons)
         }
-        return pokemonRemoteDataSource.fetchAllPokemons()
+        return pokemonLocalDataSource.getAllPokemons()
     }
 
     suspend fun fetchPokemonByName(name: String): Pokemon
