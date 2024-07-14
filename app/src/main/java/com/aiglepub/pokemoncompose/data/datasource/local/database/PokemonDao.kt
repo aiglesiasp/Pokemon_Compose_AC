@@ -5,15 +5,16 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.aiglepub.pokemoncompose.data.Pokemon
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PokemonDao {
 
     @Query("SELECT * FROM Pokemon")
-    suspend fun getAllPokemons(): List<Pokemon>
+    fun getAllPokemons(): Flow<List<Pokemon>>
 
     @Query("SELECT * FROM Pokemon WHERE name = :name")
-    suspend fun getPokemonByname(name: String): Pokemon?
+    fun getPokemonByname(name: String): Flow<Pokemon?>
 
     @Query("SELECT COUNT() FROM Pokemon")
     suspend fun countPokemons(): Int
