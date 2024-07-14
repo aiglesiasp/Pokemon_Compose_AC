@@ -93,7 +93,7 @@ private fun PokemonDetail(
 
         Text(
             text = buildAnnotatedString {
-                Property("NAME: ", pokemon.name.toUpperCase())
+                Property("NAME: ", pokemon.name.uppercase())
                 Property("HEIGHT: ", pokemon.height.toString())
                 Property("WEIGHT: ", pokemon.weight.toString())
                 /*pokemon.stats.forEach {remoteStat ->

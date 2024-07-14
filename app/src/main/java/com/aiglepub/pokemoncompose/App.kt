@@ -12,6 +12,7 @@ class App : Application() {
         super.onCreate()
 
         db = Room.databaseBuilder(this, PokemonDatabase::class.java, "pokemon-db")
+            .fallbackToDestructiveMigration()
             .build()
     }
 }
