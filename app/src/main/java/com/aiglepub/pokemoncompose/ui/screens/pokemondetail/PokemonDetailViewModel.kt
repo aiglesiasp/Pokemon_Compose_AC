@@ -4,28 +4,24 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aiglepub.pokemoncompose.data.Pokemon
 import com.aiglepub.pokemoncompose.data.PokemonRepository
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class PokemonDetailViewModel(
-    private val name: String,
+    name: String,
     private val repository: PokemonRepository
 ): ViewModel() {
 
-    private val _state: MutableStateFlow<UiState> = MutableStateFlow(UiState())
-    val state: StateFlow<UiState> = _state.asStateFlow()
-
-    init {
-        viewModelScope.launch {
-            _state.value = UiState(loading = true)
-            repository.fetchPokemonByName(name).collect { pokemon ->
-                _state.value = UiState(loading = false, pokemon = pokemon)
-            }
-           // _state.value = UiState(loading = false, pokemon = repository.fetchPokemonByName(name))
-        }
-    }
+    val state: StateFlow<UiState> = repository.fetchPokemonByName(name)
+        .map { pokemon -> UiState(pokemon = pokemon) }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = UiState(loading = true)
+        )
 
     data class UiState(
         val loading: Boolean = false,
