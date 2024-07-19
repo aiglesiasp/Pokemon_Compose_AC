@@ -29,8 +29,8 @@ private fun RemoteSimplePokemon.toDomainModel(): Pokemon {
             id = pokemonNumber.toInt(),
             name = name,
             poster = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$pokemonNumber.png",
-            height = pokemonNumber.toInt(),
-            weight = pokemonNumber.toInt(),
+            height = 0,
+            weight = 0,
             //stats = emptyList(),
             //types = emptyList()
         )

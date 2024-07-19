@@ -17,4 +17,5 @@ class PokemonLocalDataSource(private var pokemonDao: PokemonDao) {
 
     //INSERT POKEMONS
     suspend fun insertPokemons(pokemons: List<Pokemon>) = pokemonDao.insertPokemons(pokemons)
+
 }

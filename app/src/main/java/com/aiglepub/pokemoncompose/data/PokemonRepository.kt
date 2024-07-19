@@ -32,11 +32,32 @@ class PokemonRepository(
 
 
     fun fetchPokemonByName(name: String): Flow<Pokemon?> = pokemonLocalDataSource.getPokemonByName(name).transform { localPokemon ->
-        val pokemon = localPokemon.takeIf { it != null }
-            ?: pokemonRemoteDataSource.fetchPokemonByName(name).also {
-            pokemonLocalDataSource.insertPokemons(listOf(it))
+        val pokemonRemote = pokemonRemoteDataSource.fetchPokemonByName(name)
+        if(localPokemon != null) {
+            updatePokemon(pokemonRemote)
+        } else {
+            pokemonLocalDataSource.insertPokemons(listOf(pokemonRemote))
         }
-        emit(pokemon)
+        emit(pokemonRemote)
+
+
+        //val pokemon = localPokemon.takeIf { it != null }
+       //     ?: pokemonRemoteDataSource.fetchPokemonByName(name).also {
+        //    pokemonLocalDataSource.insertPokemons(listOf(it))
+        //}
+        //emit(pokemon)
+    }
+
+    suspend fun updatePokemon(pokemon: Pokemon) {
+        pokemonLocalDataSource.insertPokemons(
+            listOf(pokemon.copy(
+                id = pokemon.id,
+                name = pokemon.name,
+                poster = pokemon.poster,
+                height = pokemon.height,
+                weight = pokemon.weight)
+            )
+        )
     }
 
     /*
