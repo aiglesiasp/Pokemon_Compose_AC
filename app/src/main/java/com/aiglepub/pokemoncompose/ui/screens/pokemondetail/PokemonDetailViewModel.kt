@@ -8,11 +8,10 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 
 class PokemonDetailViewModel(
     name: String,
-    private val repository: PokemonRepository
+    repository: PokemonRepository
 ): ViewModel() {
 
     val state: StateFlow<UiState> = repository.fetchPokemonByName(name)
