@@ -3,6 +3,7 @@ package com.aiglepub.pokemoncompose.data
 import com.aiglepub.pokemoncompose.data.datasource.local.PokemonLocalDataSource
 import com.aiglepub.pokemoncompose.data.datasource.remote.PokemonRemoteDataSource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.transform
 
 class PokemonRepository(
@@ -10,22 +11,22 @@ class PokemonRepository(
     private val pokemonLocalDataSource: PokemonLocalDataSource
 ) {
 
-    val pokemons: Flow<List<Pokemon>> = pokemonLocalDataSource.pokemons.transform { localPokemons ->
-        val pokemons = localPokemons.takeIf { it.isNotEmpty() }
-            ?: pokemonRemoteDataSource.fetchAllPokemons().also {
-                pokemonLocalDataSource.insertPokemons(it)
-            }
-        emit(pokemons)
+    val pokemons: Flow<List<Pokemon>> = pokemonLocalDataSource.pokemons.onEach { localPokemons ->
+        if(localPokemons.isEmpty()) {
+            val remotePokemons = pokemonRemoteDataSource.fetchAllPokemons()
+            pokemonLocalDataSource.insertPokemons(remotePokemons)
+        }
     }
 
-    fun fetchPokemonByName(name: String): Flow<Pokemon?> = pokemonLocalDataSource.getPokemonByName(name).transform { localPokemon ->
-        val pokemonRemote = pokemonRemoteDataSource.fetchPokemonByName(name)
-        if(localPokemon != null) {
-            updatePokemon(pokemonRemote)
-        } else {
-            pokemonLocalDataSource.insertPokemons(listOf(pokemonRemote))
+    fun fetchPokemonByName(name: String): Flow<Pokemon?> = pokemonLocalDataSource.getPokemonByName(name).onEach { localPokemon ->
+        if(localPokemon == null) {
+            val remotePokemon = pokemonRemoteDataSource.fetchPokemonByName(name)
+            pokemonLocalDataSource.insertPokemons(listOf(remotePokemon))
         }
-        emit(pokemonRemote)
+        if(localPokemon != null && localPokemon.height == 0 && localPokemon.weight == 0) {
+            val remotePokemon = pokemonRemoteDataSource.fetchPokemonByName(name)
+            updatePokemon(remotePokemon)
+        }
     }
 
     suspend fun updatePokemon(pokemon: Pokemon) {
