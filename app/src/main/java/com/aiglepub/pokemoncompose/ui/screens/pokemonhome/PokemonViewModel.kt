@@ -2,27 +2,29 @@ package com.aiglepub.pokemoncompose.ui.screens.pokemonhome
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.aiglepub.pokemoncompose.Result
 import com.aiglepub.pokemoncompose.data.Pokemon
 import com.aiglepub.pokemoncompose.data.PokemonRepository
-import kotlinx.coroutines.flow.SharingStarted
+import com.aiglepub.pokemoncompose.stateAsResultIn
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.flatMapLatest
 
 class PokemonViewModel(repository: PokemonRepository): ViewModel() {
 
-    val state: StateFlow<UiState> = repository.pokemons
-        .map { UiState(pokemons = it) }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = UiState(loading = true)
-        )
+    private val uiReadyState = MutableStateFlow(false)
 
-    fun onUiReady() {}
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val state: StateFlow<Result<List<Pokemon>>> = uiReadyState
+        .filter { it }
+        .flatMapLatest {  repository.pokemons }
+        .stateAsResultIn(viewModelScope)
 
-    data class UiState(
-        val loading: Boolean = false,
-        val pokemons: List<Pokemon> = emptyList()
-    )
+
+
+    fun onUiReady() {
+        uiReadyState.value = true
+    }
 }

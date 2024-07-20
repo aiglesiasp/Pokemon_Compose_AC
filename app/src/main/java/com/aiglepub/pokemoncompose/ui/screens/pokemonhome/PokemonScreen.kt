@@ -16,7 +16,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -33,8 +32,8 @@ import coil.compose.AsyncImage
 import com.aiglepub.pokemoncompose.R
 import com.aiglepub.pokemoncompose.data.Pokemon
 import com.aiglepub.pokemoncompose.ui.ScreenAppTheme
-import com.aiglepub.pokemoncompose.ui.common.LoadingProgressIndicator
 import com.aiglepub.pokemoncompose.ui.common.PermissionRequestEffect
+import com.aiglepub.pokemoncompose.ui.common.PkScaffold
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,7 +49,11 @@ fun PokemonScreen(vm: PokemonViewModel,
     }
 
     ScreenAppTheme {
-        Scaffold(
+
+        val state by vm.state.collectAsState()
+
+        PkScaffold(
+            state = state,
             topBar = {
                 TopAppBar(
                     title = { Text(text = stringResource(id = R.string.app_name)) },
@@ -59,13 +62,7 @@ fun PokemonScreen(vm: PokemonViewModel,
             },
             modifier = Modifier.nestedScroll(pokemonState.scrollBehavior.nestedScrollConnection),
             contentWindowInsets = WindowInsets.safeDrawing
-        ) { paddingValues ->
-
-            val state by vm.state.collectAsState()
-
-            if(state.loading) {
-                LoadingProgressIndicator(modifier = Modifier.padding(paddingValues))
-            }
+        ) { paddingValues, pokemons ->
 
             LazyVerticalGrid(
                 columns = GridCells.Adaptive(120.dp),
@@ -74,7 +71,7 @@ fun PokemonScreen(vm: PokemonViewModel,
                 modifier = Modifier.padding(horizontal = 4.dp),
                 contentPadding = paddingValues
             ) {
-                items(state.pokemons) {pokemon ->
+                items(pokemons) {pokemon ->
                     PokemonItem(
                         pokemon = pokemon,
                         onClick = { onClick(pokemon) }

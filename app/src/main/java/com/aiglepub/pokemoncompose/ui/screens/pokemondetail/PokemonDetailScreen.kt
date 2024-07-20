@@ -15,7 +15,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -36,33 +35,30 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.aiglepub.pokemoncompose.data.Pokemon
 import com.aiglepub.pokemoncompose.ui.ScreenAppTheme
-import com.aiglepub.pokemoncompose.ui.common.LoadingProgressIndicator
+import com.aiglepub.pokemoncompose.ui.common.PkScaffold
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PokemonDetailScreen(vm: PokemonDetailViewModel, onBack: () -> Unit) {
     val state by vm.state.collectAsState()
-    val detailState = rememberPokemonDetailState()
+    val detailState = rememberPokemonDetailState(state)
 
     ScreenAppTheme {
-        Scaffold(
+        PkScaffold(
+            state = state,
             topBar = {
                 DetailTopBar(
-                    title = state.pokemon?.name ?: "",
+                    title = detailState.topBarTitle,
                     scrollBehavior = detailState.scrollBehavior,
                     onBack = onBack)
             },
             modifier = Modifier.nestedScroll(detailState.scrollBehavior.nestedScrollConnection),
             contentWindowInsets = WindowInsets.safeDrawing
-        ) {paddingValues ->
-
-            if(state.loading) {
-                LoadingProgressIndicator(modifier = Modifier.padding(paddingValues))
-            }
-
-            state.pokemon?.let {pokemon ->
-                PokemonDetail(pokemon = pokemon, modifier = Modifier.padding(paddingValues))
-            }
+        ) {paddingValues, pokemon ->
+            PokemonDetail(
+                pokemon = pokemon,
+                modifier = Modifier.padding(paddingValues)
+            )
         }
     }
 }
