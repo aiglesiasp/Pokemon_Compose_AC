@@ -12,6 +12,8 @@ import com.aiglepub.pokemoncompose.data.PokemonRepository
 import com.aiglepub.pokemoncompose.data.datasource.local.PokemonLocalDataSource
 import com.aiglepub.pokemoncompose.data.datasource.remote.PokemonRemoteDataSource
 import com.aiglepub.pokemoncompose.data.datasource.remote.network.PokemonClient
+import com.aiglepub.pokemoncompose.domain.usecases.FetchPokemonByNameUseCase
+import com.aiglepub.pokemoncompose.domain.usecases.FetchPokemonsUseCase
 import com.aiglepub.pokemoncompose.ui.screens.pokemondetail.PokemonDetailScreen
 import com.aiglepub.pokemoncompose.ui.screens.pokemondetail.PokemonDetailViewModel
 import com.aiglepub.pokemoncompose.ui.screens.pokemonhome.PokemonScreen
@@ -26,11 +28,13 @@ fun Navigation() {
     val pokemonRemoteDataSource = PokemonRemoteDataSource(pokemonClient)
     val pokemonLocalDataSource = PokemonLocalDataSource(aplication.db.pokemonDao())
     val pokemonRepository = PokemonRepository(pokemonRemoteDataSource, pokemonLocalDataSource)
+    val fetchPokemonsUseCase = FetchPokemonsUseCase(pokemonRepository)
+    val fetchPokemonByNameUseCase = FetchPokemonByNameUseCase(pokemonRepository)
 
     NavHost(navController = navController, startDestination = PokemonHome ) {
         composable<PokemonHome> {
             PokemonScreen(
-                vm = viewModel { PokemonViewModel(pokemonRepository) },
+                vm = viewModel { PokemonViewModel(fetchPokemonsUseCase) },
                 onClick = { pokemon ->
                     navController.navigate(PokemonDetail(pokemon.name))
                 }
@@ -41,7 +45,7 @@ fun Navigation() {
         ) {backStackEntry ->
             val pokemonDetail = backStackEntry.toRoute<PokemonDetail>()
             PokemonDetailScreen(
-                vm = viewModel { PokemonDetailViewModel(pokemonDetail.pokemonName, pokemonRepository) },
+                vm = viewModel { PokemonDetailViewModel(pokemonDetail.pokemonName, fetchPokemonByNameUseCase) },
                 onBack = { navController.popBackStack(route = PokemonHome, inclusive = false) }
             )
         }
