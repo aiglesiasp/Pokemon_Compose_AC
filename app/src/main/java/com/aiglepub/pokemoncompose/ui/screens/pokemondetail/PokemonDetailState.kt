@@ -6,7 +6,7 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import com.aiglepub.pokemoncompose.data.Pokemon
+import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 import com.aiglepub.pokemoncompose.Result
 
 @OptIn(ExperimentalMaterial3Api::class)

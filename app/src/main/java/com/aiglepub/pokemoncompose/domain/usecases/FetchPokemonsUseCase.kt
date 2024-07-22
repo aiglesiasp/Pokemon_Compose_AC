@@ -1,6 +1,6 @@
 package com.aiglepub.pokemoncompose.domain.usecases
 
-import com.aiglepub.pokemoncompose.data.Pokemon
+import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 import com.aiglepub.pokemoncompose.data.PokemonRepository
 import kotlinx.coroutines.flow.Flow
 

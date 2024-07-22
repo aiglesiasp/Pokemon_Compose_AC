@@ -30,7 +30,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.aiglepub.pokemoncompose.R
-import com.aiglepub.pokemoncompose.data.Pokemon
+import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 import com.aiglepub.pokemoncompose.ui.ScreenAppTheme
 import com.aiglepub.pokemoncompose.ui.common.PermissionRequestEffect
 import com.aiglepub.pokemoncompose.ui.common.PkScaffold

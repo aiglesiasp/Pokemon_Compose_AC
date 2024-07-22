@@ -1,6 +1,6 @@
 package com.aiglepub.pokemoncompose.data.datasource.remote
 
-import com.aiglepub.pokemoncompose.data.Pokemon
+import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 import com.aiglepub.pokemoncompose.data.datasource.remote.network.PokemonService
 import com.aiglepub.pokemoncompose.data.datasource.remote.network.RemoteFullPokemon
 import com.aiglepub.pokemoncompose.data.datasource.remote.network.RemoteSimplePokemon
@@ -31,8 +31,8 @@ private fun RemoteSimplePokemon.toDomainModel(): Pokemon {
             poster = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$pokemonNumber.png",
             height = 0,
             weight = 0,
-            //stats = emptyList(),
-            //types = emptyList()
+            stats = emptyList(),
+            types = emptyList()
         )
     } else {
         Pokemon(
@@ -41,8 +41,8 @@ private fun RemoteSimplePokemon.toDomainModel(): Pokemon {
             poster = "",
             height = 0,
             weight = 0,
-            //stats = emptyList(),
-            //types = emptyList()
+            stats = emptyList(),
+            types = emptyList()
         )
     }
 }
@@ -54,7 +54,7 @@ private fun RemoteFullPokemon.toDomainModel(): Pokemon {
         poster = sprites.frontDefault,
         height = height,
         weight = weight,
-        //stats = stats,
-        //types = types
+        stats = emptyList(),
+        types = emptyList()
     )
 }

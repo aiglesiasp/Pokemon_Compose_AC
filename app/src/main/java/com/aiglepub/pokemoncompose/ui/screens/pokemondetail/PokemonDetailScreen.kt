@@ -33,7 +33,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.aiglepub.pokemoncompose.data.Pokemon
+import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 import com.aiglepub.pokemoncompose.ui.ScreenAppTheme
 import com.aiglepub.pokemoncompose.ui.common.PkScaffold
 
