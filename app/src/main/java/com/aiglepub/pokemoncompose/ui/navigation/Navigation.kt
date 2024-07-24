@@ -12,8 +12,8 @@ import com.aiglepub.pokemoncompose.data.PokemonRepository
 import com.aiglepub.pokemoncompose.framework.api.PokemonClient
 import com.aiglepub.pokemoncompose.domain.usecases.FetchPokemonByNameUseCase
 import com.aiglepub.pokemoncompose.domain.usecases.FetchPokemonsUseCase
-import com.aiglepub.pokemoncompose.framework.api.PokemonRemoteDataSourceImpl
-import com.aiglepub.pokemoncompose.framework.database.PokemonLocalDataSourceImpl
+import com.aiglepub.pokemoncompose.framework.PokemonRemoteDataSourceImpl
+import com.aiglepub.pokemoncompose.framework.PokemonLocalDataSourceImpl
 import com.aiglepub.pokemoncompose.ui.screens.pokemondetail.PokemonDetailScreen
 import com.aiglepub.pokemoncompose.ui.screens.pokemondetail.PokemonDetailViewModel
 import com.aiglepub.pokemoncompose.ui.screens.pokemonhome.PokemonScreen

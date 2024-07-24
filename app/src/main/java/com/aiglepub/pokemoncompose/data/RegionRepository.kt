@@ -1,6 +1,6 @@
 package com.aiglepub.pokemoncompose.data
 
-import com.aiglepub.pokemoncompose.data.datasource.remote.RegionDataSource
+import com.aiglepub.pokemoncompose.data.remote.RegionDataSource
 
 const val DEFAULT_REGION = "US"
 

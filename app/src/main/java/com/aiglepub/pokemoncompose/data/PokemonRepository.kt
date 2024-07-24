@@ -1,7 +1,7 @@
 package com.aiglepub.pokemoncompose.data
 
-import com.aiglepub.pokemoncompose.data.datasource.local.PokemonLocalDataSource
-import com.aiglepub.pokemoncompose.data.datasource.remote.PokemonRemoteDataSource
+import com.aiglepub.pokemoncompose.data.local.PokemonLocalDataSource
+import com.aiglepub.pokemoncompose.data.remote.PokemonRemoteDataSource
 import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull

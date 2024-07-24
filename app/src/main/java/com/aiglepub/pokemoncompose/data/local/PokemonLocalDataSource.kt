@@ -1,4 +1,4 @@
-package com.aiglepub.pokemoncompose.data.datasource.local
+package com.aiglepub.pokemoncompose.data.local
 
 import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 import kotlinx.coroutines.flow.Flow

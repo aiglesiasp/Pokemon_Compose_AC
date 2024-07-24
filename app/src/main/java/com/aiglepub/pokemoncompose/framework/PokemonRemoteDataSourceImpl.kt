@@ -1,7 +1,10 @@
-package com.aiglepub.pokemoncompose.framework.api
+package com.aiglepub.pokemoncompose.framework
 
-import com.aiglepub.pokemoncompose.data.datasource.remote.PokemonRemoteDataSource
+import com.aiglepub.pokemoncompose.data.remote.PokemonRemoteDataSource
 import com.aiglepub.pokemoncompose.domain.entities.Pokemon
+import com.aiglepub.pokemoncompose.framework.api.PokemonService
+import com.aiglepub.pokemoncompose.framework.api.RemoteFullPokemon
+import com.aiglepub.pokemoncompose.framework.api.RemoteSimplePokemon
 
 class PokemonRemoteDataSourceImpl(
     private val pokemonService: PokemonService
