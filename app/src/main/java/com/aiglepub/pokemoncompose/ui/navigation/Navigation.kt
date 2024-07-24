@@ -9,8 +9,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.aiglepub.pokemoncompose.App
 import com.aiglepub.pokemoncompose.data.PokemonRepository
-import com.aiglepub.pokemoncompose.data.datasource.local.PokemonLocalDataSource
-import com.aiglepub.pokemoncompose.data.datasource.remote.PokemonRemoteDataSource
+import com.aiglepub.pokemoncompose.data.datasource.local.PokemonLocalDataSourceImpl
+import com.aiglepub.pokemoncompose.data.datasource.remote.PokemonRemoteDataSourceImpl
 import com.aiglepub.pokemoncompose.data.datasource.remote.network.PokemonClient
 import com.aiglepub.pokemoncompose.domain.usecases.FetchPokemonByNameUseCase
 import com.aiglepub.pokemoncompose.domain.usecases.FetchPokemonsUseCase
@@ -25,8 +25,8 @@ fun Navigation() {
     val navController = rememberNavController()
     val pokemonClient = PokemonClient.instance
     val aplication = LocalContext.current.applicationContext as App
-    val pokemonRemoteDataSource = PokemonRemoteDataSource(pokemonClient)
-    val pokemonLocalDataSource = PokemonLocalDataSource(aplication.db.pokemonDao())
+    val pokemonRemoteDataSource = PokemonRemoteDataSourceImpl(pokemonClient)
+    val pokemonLocalDataSource = PokemonLocalDataSourceImpl(aplication.db.pokemonDao())
     val pokemonRepository = PokemonRepository(pokemonRemoteDataSource, pokemonLocalDataSource)
     val fetchPokemonsUseCase = FetchPokemonsUseCase(pokemonRepository)
     val fetchPokemonByNameUseCase = FetchPokemonByNameUseCase(pokemonRepository)

@@ -5,16 +5,21 @@ import com.aiglepub.pokemoncompose.data.datasource.remote.network.PokemonService
 import com.aiglepub.pokemoncompose.data.datasource.remote.network.RemoteFullPokemon
 import com.aiglepub.pokemoncompose.data.datasource.remote.network.RemoteSimplePokemon
 
-class PokemonRemoteDataSource(
+interface PokemonRemoteDataSource {
+    suspend fun fetchAllPokemons(): List<Pokemon>
+    suspend fun fetchPokemonByName(name: String): Pokemon
+}
+
+class PokemonRemoteDataSourceImpl(
     private val pokemonService: PokemonService
-) {
-    suspend fun fetchAllPokemons(): List<Pokemon> =
+) : PokemonRemoteDataSource {
+    override suspend fun fetchAllPokemons(): List<Pokemon> =
         pokemonService
             .fetchAllPokemons()
             .results
             .map { it.toDomainModel() }
 
-    suspend fun fetchPokemonByName(name: String): Pokemon =
+    override suspend fun fetchPokemonByName(name: String): Pokemon =
         pokemonService
             .fetchPokemonByName(name)
             .toDomainModel()
