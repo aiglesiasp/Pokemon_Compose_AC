@@ -1,16 +1,11 @@
-package com.aiglepub.pokemoncompose.data.datasource.local
+package com.aiglepub.pokemoncompose.framework.database
 
-import com.aiglepub.pokemoncompose.domain.entities.Pokemon
+import com.aiglepub.pokemoncompose.data.datasource.local.PokemonDb
+import com.aiglepub.pokemoncompose.data.datasource.local.PokemonLocalDataSource
 import com.aiglepub.pokemoncompose.data.datasource.local.database.PokemonDao
+import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-
-interface PokemonLocalDataSource {
-    val pokemons: Flow<List<Pokemon>>
-    fun getPokemonByName(name: String): Flow<Pokemon?>
-    suspend fun isEmpty(): Boolean
-    suspend fun insertPokemons(pokemons: List<Pokemon>)
-}
 
 class PokemonLocalDataSourceImpl(private var pokemonDao: PokemonDao) : PokemonLocalDataSource {
 
@@ -57,6 +52,4 @@ private fun Pokemon.toDbPokemon(): PokemonDb {
 private fun List<Pokemon>.toDbPokemon(): List<PokemonDb> {
     return map { it.toDbPokemon() }
 }
-
-
 

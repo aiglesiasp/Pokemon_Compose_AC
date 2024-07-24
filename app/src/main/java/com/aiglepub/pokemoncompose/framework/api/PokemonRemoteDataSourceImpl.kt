@@ -1,14 +1,10 @@
-package com.aiglepub.pokemoncompose.data.datasource.remote
+package com.aiglepub.pokemoncompose.framework.api
 
-import com.aiglepub.pokemoncompose.domain.entities.Pokemon
+import com.aiglepub.pokemoncompose.data.datasource.remote.PokemonRemoteDataSource
 import com.aiglepub.pokemoncompose.data.datasource.remote.network.PokemonService
 import com.aiglepub.pokemoncompose.data.datasource.remote.network.RemoteFullPokemon
 import com.aiglepub.pokemoncompose.data.datasource.remote.network.RemoteSimplePokemon
-
-interface PokemonRemoteDataSource {
-    suspend fun fetchAllPokemons(): List<Pokemon>
-    suspend fun fetchPokemonByName(name: String): Pokemon
-}
+import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 
 class PokemonRemoteDataSourceImpl(
     private val pokemonService: PokemonService

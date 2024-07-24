@@ -1,4 +1,4 @@
-package com.aiglepub.pokemoncompose.data.datasource.local
+package com.aiglepub.pokemoncompose.framework
 
 import android.location.Address
 import android.location.Geocoder
@@ -6,17 +6,14 @@ import android.location.Location
 import android.os.Build
 import androidx.annotation.FloatRange
 import androidx.annotation.IntRange
+import com.aiglepub.pokemoncompose.data.datasource.remote.LocationDataSource
+import com.aiglepub.pokemoncompose.data.datasource.remote.RegionDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 
 const val DEFAULT_REGION = "US"
-
-interface RegionDataSource {
-    suspend fun findLastRegion(): String
-    suspend fun Location.toRegion(): String
-}
 
 class RegionDataSourceImpl(
     private val geocoder: Geocoder,
