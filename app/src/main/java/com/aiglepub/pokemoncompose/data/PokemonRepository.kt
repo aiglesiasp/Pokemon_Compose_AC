@@ -1,15 +1,15 @@
 package com.aiglepub.pokemoncompose.data
 
-import com.aiglepub.pokemoncompose.data.datasource.local.PokemonLocalDataSourceImpl
-import com.aiglepub.pokemoncompose.data.datasource.remote.PokemonRemoteDataSourceImpl
+import com.aiglepub.pokemoncompose.data.datasource.local.PokemonLocalDataSource
+import com.aiglepub.pokemoncompose.data.datasource.remote.PokemonRemoteDataSource
 import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.onEach
 
 class PokemonRepository(
-    private val pokemonRemoteDataSource: PokemonRemoteDataSourceImpl,
-    private val pokemonLocalDataSource: PokemonLocalDataSourceImpl
+    private val pokemonRemoteDataSource: PokemonRemoteDataSource,
+    private val pokemonLocalDataSource: PokemonLocalDataSource
 ) {
 
     val pokemons: Flow<List<Pokemon>> = pokemonLocalDataSource.pokemons.onEach { localPokemons ->
