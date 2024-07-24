@@ -1,8 +1,6 @@
 package com.aiglepub.pokemoncompose.framework.database
 
-import com.aiglepub.pokemoncompose.data.datasource.local.PokemonDb
 import com.aiglepub.pokemoncompose.data.datasource.local.PokemonLocalDataSource
-import com.aiglepub.pokemoncompose.data.datasource.local.database.PokemonDao
 import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

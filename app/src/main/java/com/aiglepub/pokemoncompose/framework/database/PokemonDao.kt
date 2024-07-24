@@ -1,11 +1,9 @@
-package com.aiglepub.pokemoncompose.data.datasource.local.database
+package com.aiglepub.pokemoncompose.framework.database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.aiglepub.pokemoncompose.data.datasource.local.PokemonDb
-import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 import kotlinx.coroutines.flow.Flow
 
 @Dao

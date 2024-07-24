@@ -9,7 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.aiglepub.pokemoncompose.App
 import com.aiglepub.pokemoncompose.data.PokemonRepository
-import com.aiglepub.pokemoncompose.data.datasource.remote.network.PokemonClient
+import com.aiglepub.pokemoncompose.framework.api.PokemonClient
 import com.aiglepub.pokemoncompose.domain.usecases.FetchPokemonByNameUseCase
 import com.aiglepub.pokemoncompose.domain.usecases.FetchPokemonsUseCase
 import com.aiglepub.pokemoncompose.framework.api.PokemonRemoteDataSourceImpl

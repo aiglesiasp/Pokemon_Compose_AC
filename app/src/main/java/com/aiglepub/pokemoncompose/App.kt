@@ -2,7 +2,7 @@ package com.aiglepub.pokemoncompose
 
 import android.app.Application
 import androidx.room.Room
-import com.aiglepub.pokemoncompose.data.datasource.local.database.PokemonDatabase
+import com.aiglepub.pokemoncompose.framework.database.PokemonDatabase
 
 class App : Application() {
 

@@ -1,9 +1,6 @@
 package com.aiglepub.pokemoncompose.framework.api
 
 import com.aiglepub.pokemoncompose.data.datasource.remote.PokemonRemoteDataSource
-import com.aiglepub.pokemoncompose.data.datasource.remote.network.PokemonService
-import com.aiglepub.pokemoncompose.data.datasource.remote.network.RemoteFullPokemon
-import com.aiglepub.pokemoncompose.data.datasource.remote.network.RemoteSimplePokemon
 import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 
 class PokemonRemoteDataSourceImpl(
