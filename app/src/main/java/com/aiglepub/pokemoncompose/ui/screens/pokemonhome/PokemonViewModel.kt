@@ -6,13 +6,16 @@ import com.aiglepub.pokemoncompose.Result
 import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 import com.aiglepub.pokemoncompose.domain.usecases.FetchPokemonsUseCase
 import com.aiglepub.pokemoncompose.stateAsResultIn
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flatMapLatest
+import javax.inject.Inject
 
-class PokemonViewModel(private val fetchPokemonsUseCase: FetchPokemonsUseCase): ViewModel() {
+@HiltViewModel
+class PokemonViewModel @Inject constructor(private val fetchPokemonsUseCase: FetchPokemonsUseCase): ViewModel() {
 
     private val uiReadyState = MutableStateFlow(false)
 

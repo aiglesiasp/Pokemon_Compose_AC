@@ -6,9 +6,12 @@ import com.aiglepub.pokemoncompose.Result
 import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 import com.aiglepub.pokemoncompose.domain.usecases.FetchPokemonByNameUseCase
 import com.aiglepub.pokemoncompose.stateAsResultIn
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class PokemonDetailViewModel(
+@HiltViewModel
+class PokemonDetailViewModel @Inject constructor(
     name: String,
     fetchPokemonByNameUseCase: FetchPokemonByNameUseCase,
 ): ViewModel() {
