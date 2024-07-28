@@ -1,4 +1,4 @@
-package com.aiglepub.pokemoncompose.framework
+package com.aiglepub.pokemoncompose.framework.remote
 
 import android.location.Address
 import android.location.Geocoder

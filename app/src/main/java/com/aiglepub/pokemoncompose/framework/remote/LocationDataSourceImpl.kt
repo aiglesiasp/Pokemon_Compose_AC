@@ -1,4 +1,4 @@
-package com.aiglepub.pokemoncompose.framework
+package com.aiglepub.pokemoncompose.framework.remote
 
 import android.annotation.SuppressLint
 import android.location.Location

@@ -1,4 +1,4 @@
-package com.aiglepub.pokemoncompose.framework.api
+package com.aiglepub.pokemoncompose.framework.remote.api
 
 import retrofit2.http.GET
 import retrofit2.http.Path

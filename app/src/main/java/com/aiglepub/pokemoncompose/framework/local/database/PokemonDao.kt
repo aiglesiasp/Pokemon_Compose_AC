@@ -1,4 +1,4 @@
-package com.aiglepub.pokemoncompose.framework.database
+package com.aiglepub.pokemoncompose.framework.local.database
 
 import androidx.room.Dao
 import androidx.room.Insert

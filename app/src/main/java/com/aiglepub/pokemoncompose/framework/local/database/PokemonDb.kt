@@ -1,4 +1,4 @@
-package com.aiglepub.pokemoncompose.framework.database
+package com.aiglepub.pokemoncompose.framework.local.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,4 +1,4 @@
-package com.aiglepub.pokemoncompose.framework.database
+package com.aiglepub.pokemoncompose.framework.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

@@ -1,10 +1,10 @@
-package com.aiglepub.pokemoncompose.framework
+package com.aiglepub.pokemoncompose.framework.remote
 
 import com.aiglepub.pokemoncompose.data.remote.PokemonRemoteDataSource
 import com.aiglepub.pokemoncompose.domain.entities.Pokemon
-import com.aiglepub.pokemoncompose.framework.api.PokemonService
-import com.aiglepub.pokemoncompose.framework.api.RemoteFullPokemon
-import com.aiglepub.pokemoncompose.framework.api.RemoteSimplePokemon
+import com.aiglepub.pokemoncompose.framework.remote.api.PokemonService
+import com.aiglepub.pokemoncompose.framework.remote.api.RemoteFullPokemon
+import com.aiglepub.pokemoncompose.framework.remote.api.RemoteSimplePokemon
 import javax.inject.Inject
 
 class PokemonRemoteDataSourceImpl @Inject constructor(

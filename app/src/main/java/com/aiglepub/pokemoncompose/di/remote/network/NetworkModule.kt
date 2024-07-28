@@ -2,8 +2,8 @@ package com.aiglepub.pokemoncompose.di.remote.network
 
 import android.content.Context
 import android.location.Geocoder
-import com.aiglepub.pokemoncompose.framework.api.PokemonClient
-import com.aiglepub.pokemoncompose.framework.api.PokemonService
+import com.aiglepub.pokemoncompose.framework.remote.api.PokemonClient
+import com.aiglepub.pokemoncompose.framework.remote.api.PokemonService
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import dagger.Module

@@ -1,7 +1,7 @@
 package com.aiglepub.pokemoncompose.di.local
 
 import com.aiglepub.pokemoncompose.data.local.PokemonLocalDataSource
-import com.aiglepub.pokemoncompose.framework.PokemonLocalDataSourceImpl
+import com.aiglepub.pokemoncompose.framework.local.PokemonLocalDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

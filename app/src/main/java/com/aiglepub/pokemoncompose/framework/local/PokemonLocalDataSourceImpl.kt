@@ -1,9 +1,9 @@
-package com.aiglepub.pokemoncompose.framework
+package com.aiglepub.pokemoncompose.framework.local
 
 import com.aiglepub.pokemoncompose.data.local.PokemonLocalDataSource
 import com.aiglepub.pokemoncompose.domain.entities.Pokemon
-import com.aiglepub.pokemoncompose.framework.database.PokemonDao
-import com.aiglepub.pokemoncompose.framework.database.PokemonDb
+import com.aiglepub.pokemoncompose.framework.local.database.PokemonDao
+import com.aiglepub.pokemoncompose.framework.local.database.PokemonDb
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

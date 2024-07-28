@@ -2,7 +2,7 @@ package com.aiglepub.pokemoncompose.di.local.database
 
 import android.content.Context
 import androidx.room.Room
-import com.aiglepub.pokemoncompose.framework.database.PokemonDatabase
+import com.aiglepub.pokemoncompose.framework.local.database.PokemonDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
