@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import retrofit2.create
 
-object PokemonClient {
+class PokemonClient {
 
     private val json = Json {
         ignoreUnknownKeys = true
