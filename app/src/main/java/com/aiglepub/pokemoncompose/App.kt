@@ -1,10 +1,12 @@
 package com.aiglepub.pokemoncompose
 
 import android.app.Application
-import androidx.room.Room
-import com.aiglepub.pokemoncompose.framework.database.PokemonDatabase
+import dagger.hilt.android.HiltAndroidApp
 
-class App : Application() {
+@HiltAndroidApp
+class App : Application()
+/*
+{
 
     lateinit var db: PokemonDatabase
 
@@ -16,3 +18,5 @@ class App : Application() {
             .build()
     }
 }
+
+ */
