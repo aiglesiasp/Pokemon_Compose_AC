@@ -9,10 +9,11 @@ import com.aiglepub.pokemoncompose.stateAsResultIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class PokemonDetailViewModel @Inject constructor(
-    name: String,
+    @Named("pokemonName") name: String,
     fetchPokemonByNameUseCase: FetchPokemonByNameUseCase,
 ): ViewModel() {
 

@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.aiglepub.pokemoncompose.R
 import com.aiglepub.pokemoncompose.domain.entities.Pokemon
@@ -37,8 +38,9 @@ import com.aiglepub.pokemoncompose.ui.common.PkScaffold
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PokemonScreen(vm: PokemonViewModel,
-                  onClick: (Pokemon) -> Unit
+fun PokemonScreen(
+    vm: PokemonViewModel = hiltViewModel(),
+    onClick: (Pokemon) -> Unit
 ) {
 
     val pokemonState = rememberPokemonState()
