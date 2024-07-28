@@ -11,11 +11,12 @@ import com.aiglepub.pokemoncompose.data.remote.RegionDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 import kotlin.coroutines.resume
 
 const val DEFAULT_REGION = "US"
 
-class RegionDataSourceImpl(
+class RegionDataSourceImpl @Inject constructor(
     private val geocoder: Geocoder,
     private val locationDataSource: LocationDataSource
 ) : RegionDataSource {

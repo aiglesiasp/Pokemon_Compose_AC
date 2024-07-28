@@ -5,8 +5,9 @@ import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 import com.aiglepub.pokemoncompose.framework.api.PokemonService
 import com.aiglepub.pokemoncompose.framework.api.RemoteFullPokemon
 import com.aiglepub.pokemoncompose.framework.api.RemoteSimplePokemon
+import javax.inject.Inject
 
-class PokemonRemoteDataSourceImpl(
+class PokemonRemoteDataSourceImpl @Inject constructor(
     private val pokemonService: PokemonService
 ) : PokemonRemoteDataSource {
     override suspend fun fetchAllPokemons(): List<Pokemon> =

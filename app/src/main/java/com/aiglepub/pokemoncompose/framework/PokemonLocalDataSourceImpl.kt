@@ -6,8 +6,9 @@ import com.aiglepub.pokemoncompose.framework.database.PokemonDao
 import com.aiglepub.pokemoncompose.framework.database.PokemonDb
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class PokemonLocalDataSourceImpl(private var pokemonDao: PokemonDao) : PokemonLocalDataSource {
+class PokemonLocalDataSourceImpl @Inject constructor(private var pokemonDao: PokemonDao) : PokemonLocalDataSource {
 
     //GET ALL POKEMON
     override val pokemons: Flow<List<Pokemon>> = pokemonDao.getAllPokemons().map { it.toDomainPokemon() }
