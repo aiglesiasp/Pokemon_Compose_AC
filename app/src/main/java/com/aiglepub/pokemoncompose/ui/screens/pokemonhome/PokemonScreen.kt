@@ -31,28 +31,40 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.aiglepub.pokemoncompose.R
+import com.aiglepub.pokemoncompose.Result
 import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 import com.aiglepub.pokemoncompose.ui.ScreenAppTheme
 import com.aiglepub.pokemoncompose.ui.common.PermissionRequestEffect
 import com.aiglepub.pokemoncompose.ui.common.PkScaffold
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PokemonScreen(
     vm: PokemonViewModel = hiltViewModel(),
     onClick: (Pokemon) -> Unit
 ) {
-
-    val pokemonState = rememberPokemonState()
-
     ///Comprobar la region del telefono
     PermissionRequestEffect(permission = Manifest.permission.ACCESS_COARSE_LOCATION) {
         vm.onUiReady()
     }
 
-    ScreenAppTheme {
+    val state by vm.state.collectAsState()
 
-        val state by vm.state.collectAsState()
+    PokemonScreen(
+        state = state,
+        onClick = onClick
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PokemonScreen(
+    state: Result<List<Pokemon>>,
+    onClick: (Pokemon) -> Unit
+) {
+
+    val pokemonState = rememberPokemonState()
+
+    ScreenAppTheme {
 
         PkScaffold(
             state = state,
