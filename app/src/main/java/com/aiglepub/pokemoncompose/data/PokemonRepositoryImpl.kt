@@ -14,7 +14,8 @@ class PokemonRepositoryImpl @Inject constructor(
     private val pokemonLocalDataSource: PokemonLocalDataSource
 ) : PokemonRepository {
 
-    override val pokemons: Flow<List<Pokemon>> = pokemonLocalDataSource.pokemons.onEach { localPokemons ->
+    override val pokemons: Flow<List<Pokemon>>
+        get() = pokemonLocalDataSource.pokemons.onEach { localPokemons ->
         if(localPokemons.isEmpty()) {
             val remotePokemons = pokemonRemoteDataSource.fetchAllPokemons()
             pokemonLocalDataSource.insertPokemons(remotePokemons)
