@@ -34,17 +34,27 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import com.aiglepub.pokemoncompose.Result
 import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 import com.aiglepub.pokemoncompose.ui.ScreenAppTheme
 import com.aiglepub.pokemoncompose.ui.common.PkScaffold
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PokemonDetailScreen(
     vm: PokemonDetailViewModel = hiltViewModel(),
     onBack: () -> Unit
 ) {
     val state by vm.state.collectAsState()
+    PokemonDetailScreen(state = state, onBack = onBack)
+
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PokemonDetailScreen(
+    state: Result<Pokemon>,
+    onBack: () -> Unit
+) {
     val detailState = rememberPokemonDetailState(state)
 
     ScreenAppTheme {
