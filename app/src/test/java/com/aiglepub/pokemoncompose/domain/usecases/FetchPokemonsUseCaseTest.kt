@@ -1,5 +1,6 @@
 package com.aiglepub.pokemoncompose.domain.usecases
 
+import com.aiglepub.pokemoncompose.helpers.generateListPokemons
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Assert.assertEquals
 import org.junit.Test

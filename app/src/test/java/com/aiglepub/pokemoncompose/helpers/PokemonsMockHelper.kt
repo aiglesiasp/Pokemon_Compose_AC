@@ -1,4 +1,4 @@
-package com.aiglepub.pokemoncompose.domain.usecases
+package com.aiglepub.pokemoncompose.helpers
 
 import com.aiglepub.pokemoncompose.domain.entities.Pokemon
 
