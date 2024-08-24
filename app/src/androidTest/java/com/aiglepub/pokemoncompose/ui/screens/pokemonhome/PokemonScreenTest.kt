@@ -17,7 +17,7 @@ class PokemonScreenTest {
     val composeTestRule = createComposeRule()
 
     @Test
-    fun whenLoadinState_showProgress(): Unit = with(composeTestRule) {
+    fun whenLoadingState_showProgress(): Unit = with(composeTestRule) {
         setContent {
             PokemonScreen(
                 state = Result.Loading,
